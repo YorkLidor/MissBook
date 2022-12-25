@@ -11,3 +11,23 @@
 /* Components */
 @import 'cmps/app-header.css';
 @import 'cmps/user-msg.css';
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    padding: 15px 0 0;
+    list-style: none;
+    gap: 15px;
+    margin: 10px;
+}
+
+.book-card {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    border: solid black 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
