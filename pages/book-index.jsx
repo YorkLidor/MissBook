@@ -1,36 +1,44 @@
 const { useState, useEffect, useRef } = React
 
-import { BookService } from '../services/book.service.js'
+import { bookService } from '../services/book.service.js'
 
 import { BookList } from '../cmps/book-list.jsx'
 import { BookDetails } from '../cmps/book-details.jsx'
 import { PopUpMsg } from '../cmps/pop-up-msg.jsx'
+import { BookFilter } from '../cmps/book-filter.jsx'
+
 
 export function BookIndex() {
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
     const [books, setBooks] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
-    const [popUpMsg,setPopUpMsg] = useState('')
+    const [popUpMsg, setPopUpMsg] = useState('')
+
+
 
     useEffect(() => {
         loadBooks()
-    }, [])
+    }, [filterBy])
 
     function loadBooks() {
-        BookService.query().then(books => {
-            setBooks(books)
+        bookService.query(filterBy).then(booksToUpdate => {
+            setBooks(booksToUpdate)
         })
     }
 
+    function onSetFilter(filterByFromFilter) {
+        setFilterBy(filterByFromFilter)
+    }
+
     function onRemoveBook(bookId) {
-        console.log('removeing', bookId)
-        BookService.remove(bookId).then(() => {
+        bookService.remove(bookId).then(() => {
             const booksAfetrRemove = books.filter(book => book.id !== bookId)
             setBooks(booksAfetrRemove)
             flashMsg('Book Removed')
         })
     }
 
-    function flashMsg(msg){
+    function flashMsg(msg) {
         setPopUpMsg(msg)
         setTimeout(() => {
             setPopUpMsg('')
@@ -38,23 +46,22 @@ export function BookIndex() {
     }
 
     function onSelectBook(bookId) {
-        BookService.get(bookId).then((book) => {
+        bookService.get(bookId).then((book) => {
             setSelectedBook(book)
         })
     }
 
-    function onGOback() {
-        setSelectedBook(null)
-    }
-
-
-
     return <section className='book-index'>
-        {popUpMsg && <PopUpMsg msg={popUpMsg}/>}
-        {!selectedBook && <BookList books={books}
-            onRemoveBook={onRemoveBook}
-            onSelectBook={onSelectBook} />}
+        {popUpMsg && <PopUpMsg msg={popUpMsg} />}
 
-        {selectedBook && <BookDetails book={selectedBook} onGOback={onGOback} />}
+        {!selectedBook && <div>
+            <BookFilter onSetFilter={onSetFilter} />
+            <BookList books={books}
+                onRemoveBook={onRemoveBook}
+                onSelectBook={onSelectBook} />
+        </div>
+        }
+
+        {selectedBook && <BookDetails book={selectedBook} onGOback={() => setSelectedBook(null)} />}
     </section>
 }
