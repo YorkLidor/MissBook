@@ -10,5 +10,7 @@ export function LongTxt({desc,length=100, isReadMore}){
     }
     
 
-    return returnDescNum()
+    return <h4 className="preview-description">
+        {returnDescNum()+' '}
+    </h4>
 }

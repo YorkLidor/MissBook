@@ -14,7 +14,7 @@
 
 .book-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     padding: 15px 0 0;
     list-style: none;
     gap: 15px;
@@ -38,4 +38,35 @@
 .green-price{
     color: green;
 }
+
+.read-more-a{
+    color: black;
+    font-weight: 700;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.preview-book-img{
+    margin-top: 10px;
+    /* border: 3px solid black; */
+}
+
+.book-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+/* .preview-sale-icon{
+    position: relative;
+    top: 55%;
+} */
+
+.app-nav .active{
+   color: rgb(246, 105, 105); 
+   font-weight:500;
+}
+
 

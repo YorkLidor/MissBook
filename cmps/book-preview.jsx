@@ -5,6 +5,7 @@ import {LongTxt} from './long-txt.jsx'
 export function BookPreview({ book }) {
 
     const [isReadMore, setReadMore] = useState(true)
+    let length = 100
 
     function checkPageCount(pageCount) {
         if (pageCount < 100) {
@@ -33,16 +34,16 @@ export function BookPreview({ book }) {
     }
 
     return <article className="book-preview">
-        <img src={`${book.thumbnail}`} />
+        <img className='preview-book-img' src={`${book.thumbnail}`} />
         <h2>{book.title}</h2>
-        {book.listPrice.isOnSale && <img src='./images/sale-icon.png' />}
+        {book.listPrice.isOnSale && <img className='preview-sale-icon' src='./images/sale-icon.png' />}
         <h3>Subtitle: {book.subtitle}</h3>
-        <LongTxt desc={book.description} length={100} isReadMore={isReadMore}/>
-        <a className='read-more-a' onClick={() => { setReadMore(!isReadMore) }}>
-            {isReadMore && 'More'}
-            {!isReadMore && 'Less'}
-        </a>
-        {/* <h3>Description: {book.description}</h3> */}
+        <LongTxt desc={book.description} length={length} isReadMore={isReadMore}/>
+
+        {book.description.length > length && <a className='read-more-a' onClick={() => { setReadMore(!isReadMore) }}>
+            {isReadMore && 'Read More'}
+            {!isReadMore && 'Read Less'}
+        </a>}
         {checkPageCount(book.pageCount) && <h3>{checkPageCount(book.pageCount)}</h3>}
         {checkPublishedDate(book.publishedDate) && <h3>{checkPublishedDate(book.publishedDate)}</h3>}
         <h3>Price: <span className={returnPriceColorClassName(book.listPrice.amount)}>{book.listPrice.amount}</span></h3>
