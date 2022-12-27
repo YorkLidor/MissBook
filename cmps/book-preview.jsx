@@ -38,7 +38,7 @@ export function BookPreview({ book }) {
         <h2>{book.title}</h2>
         {book.listPrice.isOnSale && <img className='preview-sale-icon' src='./images/sale-icon.png' />}
         <h3>Subtitle: {book.subtitle}</h3>
-        <LongTxt desc={book.description} length={length} isReadMore={isReadMore}/>
+        <LongTxt txt={book.description} length={length} isReadMore={isReadMore}/>
 
         {book.description.length > length && <a className='read-more-a' onClick={() => { setReadMore(!isReadMore) }}>
             {isReadMore && 'Read More'}
