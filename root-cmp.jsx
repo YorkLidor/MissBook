@@ -12,6 +12,8 @@ import { AboutIndex } from './cmps/about-index.jsx'
 import { Team } from './cmps/team.jsx'
 import { Vision } from './cmps/vision.jsx'
 
+import { UserMsg } from './cmps/user-msg.jsx'
+
 
 export function App() {
 
@@ -37,6 +39,7 @@ export function App() {
 
                 </Routes>
             </main>
+            <UserMsg/>
         </section>
     </Router>
 }

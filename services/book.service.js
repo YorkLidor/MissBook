@@ -3,7 +3,6 @@ import { storageService } from './async-storage.service.js'
 // import myJson from './example.json' assert {type: 'json'};
 
 const BOOK_KEY = 'bookDB'
-//יוצא לפועל בטעינת הקובץ
 _createBooks()
 
 export const bookService = {
@@ -13,6 +12,7 @@ export const bookService = {
   save,
   getEmptyBook,
   getDefaultFilter,
+  addReview,
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -31,7 +31,17 @@ function query(filterBy = getDefaultFilter()) {
 
 function get(bookId) {
   return storageService.get(BOOK_KEY, bookId)
-  // return axios.get(CAR_KEY, carId)
+}
+
+function addReview(bookId, review) {
+  return get(bookId).then((book) => {
+    if (!book.reviews) {
+      book.reviews = [review]
+    } else {
+      book.reviews.push(review)
+    }
+    return storageService.put(BOOK_KEY, book)
+  })
 }
 
 function remove(bookId) {
@@ -39,7 +49,9 @@ function remove(bookId) {
 }
 
 function save(book) {
-  var book = makeFullBook(book)
+  if (!book.thumbnail) {
+    var book = makeFullBook(book)
+  }
   if (book.id) {
     return storageService.put(BOOK_KEY, book)
   } else {
@@ -47,10 +59,11 @@ function save(book) {
   }
 }
 
+
 function makeFullBook(book) {
   var demoBook = {
-    "title": "metus hendrerit",
-    "subtitle": "mi est eros convallis auctor arcu dapibus himenaeos",
+    "title": "DEMOOOOOOO DEMOOOOOOO",
+    "subtitle": "DEMOOOOOOO DEMOOOOOOO ",
     "authors": [
       "Barbara Cartland"
     ],

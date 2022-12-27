@@ -6,7 +6,16 @@ export const utilService = {
     saveToStorage,
     padNum,
     getDayName,
-    getMonthName
+    getMonthName,
+    debounce
+}
+
+function debounce(func, timeout = 500){
+    let timer
+    return (...args) => {
+      clearTimeout(timer)
+      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+    }
 }
 
 function makeId(length = 6) {

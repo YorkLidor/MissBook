@@ -1,8 +1,13 @@
 const { useEffect, useState } = React
-const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useParams, useNavigate} = ReactRouterDOM
 
+import { showSuccessMsg } from "../services/event-bus.service.js"
 import { bookService } from "../services/book.service.js"
+
+
 import { BookPreview } from "../cmps/book-preview.jsx"
+import { AddReview } from "../cmps/add-review.jsx"
+import { ReviewPreview } from "../cmps/review-preview.jsx"
 
 
 export function BookDetails() {
@@ -27,9 +32,22 @@ export function BookDetails() {
         navigate('/book')
     }
 
+    function onSaveReview(review) {
+        bookService.addReview(book.id, review).then((book) => {
+            showSuccessMsg('Review saved!')
+            setBook(book)
+        })
+        console.log('Review Saved!!!')
+    }
+
     if (!book) return <div>Loading...</div>
     return <section className="book-details">
         <BookPreview book={book} />
+        
+        <AddReview onSaveReview={onSaveReview} />
+
+        <ReviewPreview book={book} />
+
 
         <button onClick={onGoBack}>Go Back</button>
     </section>

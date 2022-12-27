@@ -4,6 +4,7 @@ const { useNavigate, useParams, Link } = ReactRouterDOM
 import { bookService } from "../services/book.service.js"
 import { eventBusService, showSuccessMsg } from "../services/event-bus.service.js"
 
+import { AddBook } from "../cmps/add-book.jsx"
 
 
 export function BookEdit() {
@@ -19,7 +20,7 @@ export function BookEdit() {
 
     function loadBook() {
         bookService.get(bookId)
-            .then((book) => setBookToEdit(book))
+            .then(setBookToEdit)
             .catch((err) => {
                 console.log('Had issues in book details', err)
                 navigate('/book')
@@ -67,5 +68,7 @@ export function BookEdit() {
                 <Link to="/book">Cancel</Link>
             </div>
         </form>
+
+        <AddBook/>
     </section>
 }

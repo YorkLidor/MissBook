@@ -69,4 +69,30 @@
    font-weight:500;
 }
 
+.review-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+.review-card {
+    background-color: #56dc8c85;
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.add-review-container {
+    padding: 20px;
+    margin: 10px;
+    background-color: #56dc8c85;
+    flex-direction: row;
+}
+
+
+.google-book-add{
+    background-color: rgba(46, 169, 169, 0.682);
+}

@@ -1,16 +1,15 @@
 
-export function LongTxt({desc,length=100, isReadMore}){
+export function LongTxt({ txt, length = 100, isReadMore }) {
 
-    function returnDescNum(){
-        if(desc.length > length && isReadMore){
-            return desc.slice(0,length)
+    function returnDescNum() {
+        if (txt.length > length && isReadMore) {
+            return txt.slice(0, length)
         } else {
-            return desc
+            return txt
         }
     }
-    
 
     return <h4 className="preview-description">
-        {returnDescNum()+' '}
+        {returnDescNum() + ' '}
     </h4>
 }
